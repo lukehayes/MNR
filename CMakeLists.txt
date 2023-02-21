@@ -45,5 +45,5 @@ target_link_libraries(${BIN_NAME} GLEW)
 
 # After the source files have been compiled, link them into the final binary.
 #
-# target_link_libraries(${BIN_NAME} MNR)
+target_link_libraries(${BIN_NAME} MNR)
 

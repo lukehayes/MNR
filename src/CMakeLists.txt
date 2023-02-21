@@ -1,2 +1,3 @@
-#add_library(MNR
-#)
+add_library(MNR
+  fileio.c
+)

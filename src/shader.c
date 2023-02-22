@@ -42,31 +42,31 @@ static void gfxShaderCheckErrors(unsigned int shader, const char* type)
 Shader gfxShaderCreate(const char* vtx_path, const char* frag_path)
 {
   Shader shader;
-  shader.vertex_shader_path = vtx_path;
-  shader.fragment_shader_path = frag_path;
 
   unsigned int vertex, fragment;
 
   const char* const vsh_contents = ReadFile(vtx_path);
   const char* const fsh_contents = ReadFile(frag_path);
 
+  // Create Vertex Shader
   vertex = glCreateShader(GL_VERTEX_SHADER);
   glShaderSource(vertex, 1, &vsh_contents, NULL);
   glCompileShader(vertex);
   gfxShaderCheckErrors(vertex, "VERTEX");
 
-  // fragment Shader
+  // Create Fragment Shader
   fragment = glCreateShader(GL_FRAGMENT_SHADER);
   glShaderSource(fragment, 1, &fsh_contents, NULL);
   glCompileShader(fragment);
   gfxShaderCheckErrors(fragment, "FRAGMENT");
 
-  // shader Program
+  // Create Shader Program
   shader.program = glCreateProgram();
   glAttachShader(shader.program, vertex);
   glAttachShader(shader.program, fragment);
   glLinkProgram(shader.program);
   gfxShaderCheckErrors(shader.program, "PROGRAM");
+
   // delete the shaders as they're linked into our program now and no longer necessary
   glDeleteShader(vertex);
   glDeleteShader(fragment);
@@ -75,4 +75,9 @@ Shader gfxShaderCreate(const char* vtx_path, const char* frag_path)
   free((char*)fsh_contents);
 
   return shader;
+}
+
+void gfxShaderDestroy(Shader* shader)
+{
+  glDeleteProgram(shader->program);
 }

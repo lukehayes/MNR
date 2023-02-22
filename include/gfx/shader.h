@@ -6,8 +6,6 @@
 typedef struct Shader
 {
   GLuint program;
-  const char* vertex_shader_path;
-  const char* fragment_shader_path;
 
 } Shader;
 
@@ -21,6 +19,15 @@ typedef struct Shader
  * @return Shader
  */
 Shader gfxShaderCreate(const char* vtx_path, const char* frag_path);
+
+/**
+ * Delete the shader program.
+ *
+ * @param Shader* shader
+ *
+ * @return void
+ */
+void gfxShaderDestroy(Shader* shader);
 
 // static void gfxShaderCheckErrors(unsigned int shader, const char* type);
 

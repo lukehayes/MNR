@@ -47,3 +47,6 @@ target_link_libraries(${BIN_NAME} GLEW)
 #
 target_link_libraries(${BIN_NAME} MNR)
 
+# Link to the math library (libm)
+target_link_libraries(${BIN_NAME} m)
+

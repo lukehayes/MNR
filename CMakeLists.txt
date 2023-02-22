@@ -7,6 +7,7 @@ set(C_STANDARD  17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(INCLUDE_DIRS "${CMAKE_SOURCE_DIR}/include")
 set(BIN_NAME "app")
+set(CFLAGS "-E")
 
 # Find all source files.
 #
@@ -28,6 +29,14 @@ find_package(GLEW REQUIRED)
 # Set the project include directories.
 #
 include_directories(${INCLUDE_DIRS})
+
+
+# Add debugging option
+#
+option(MNR_DEBUG "Enter debug mode" 0)
+if (MNR_DEBUG)
+  add_definitions(-DMNR_DEBUG)
+endif()
 
 # Create the final binary.
 #

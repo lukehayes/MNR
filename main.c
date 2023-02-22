@@ -7,6 +7,12 @@
 
 float c = 0.0;
 
+#if MNR_DEBUG == 1
+#define LOG(x) (printf("LOG: %s \n", x))
+#else
+#define LOG(x)
+#endif
+
 int main(void)
 {
     GLFWwindow* window;

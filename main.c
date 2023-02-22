@@ -3,6 +3,10 @@
 #include <stdio.h>
 #include <math.h>
 
+#include "gfx/shader.h"
+
+float c = 0.0;
+
 int main(void)
 {
     GLFWwindow* window;
@@ -28,9 +32,48 @@ int main(void)
     glfwMakeContextCurrent(window);
 
     // Initialize GLAD
-     gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+    gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
 
-     float c = 0.0;
+    // ------------------------------------------------------------
+    // SIMPLE TEST OPENGL SETUP
+    float verticies[] = {
+         0.5f,  0.5f, 0.0f,
+         0.5f, -0.5f, 0.0f,
+        -0.5f, -0.5f, 0.0f,
+        -0.5f,  0.5f, 0.0f   
+    };
+
+    int indicies[] = {
+        0,1,3,
+        1,2,3
+    };
+
+    GLuint vao;
+    GLuint vbo;
+    GLuint ibo;
+
+    glGenVertexArrays( 1, &vao );
+    glBindVertexArray( vao );
+    
+    // VERTEX BUFFER
+    glGenBuffers( 1, &vbo);
+    glBindBuffer( GL_ARRAY_BUFFER, vbo);
+
+
+    glEnableVertexAttribArray( 0 );
+    glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, 0 );
+    glBufferData( GL_ARRAY_BUFFER, sizeof(float) * 12 , verticies, GL_STATIC_DRAW );
+
+    Shader shader = gfxCreateShader("../res/default-vsh.glsl", "../res/default-fsh.glsl");
+
+
+    // INDEX BUFFER
+    glGenBuffers( 1, &ibo );
+    glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, ibo );
+    glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof(int) * 6 , indicies, GL_STATIC_DRAW );
+        
+    // End of GL Setup
+    // ------------------------------------------------------------
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -38,7 +81,18 @@ int main(void)
         c += 0.1;
         /* Render here */
         glClear(GL_COLOR_BUFFER_BIT);
-        glClearColor(0.5, 0.5, 0.5, sin(c));
+        glClearColor(0.2, 0.2, 0.2, sin(c));
+
+        glUseProgram(shader.program);
+
+        glBindBuffer( GL_ARRAY_BUFFER, vbo);
+
+        glDrawElements(
+          GL_TRIANGLES,
+          6,
+          GL_UNSIGNED_INT,
+          (void*)0
+        );
 
         /* Swap front and back buffers */
         glfwSwapBuffers(window);

@@ -64,8 +64,8 @@ int main(void)
     glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, 0 );
     glBufferData( GL_ARRAY_BUFFER, sizeof(float) * 12 , verticies, GL_STATIC_DRAW );
 
-    Shader shader = gfxCreateShader("../res/default-vsh.glsl", "../res/default-fsh.glsl");
 
+    Shader shader = gfxShaderCreate("../res/default-vsh.glsl", "../res/default-fsh.glsl");
 
     // INDEX BUFFER
     glGenBuffers( 1, &ibo );

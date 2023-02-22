@@ -20,8 +20,8 @@ typedef struct Shader
  *
  * @return Shader
  */
-Shader gfxCreateShader(const char* vtx_path, const char* frag_path);
+Shader gfxShaderCreate(const char* vtx_path, const char* frag_path);
 
-void gfxCheckCompileErrors(unsigned int shader, const char* type);
+// static void gfxShaderCheckErrors(unsigned int shader, const char* type);
 
 #endif

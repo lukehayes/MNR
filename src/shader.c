@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 
-void gfxCheckCompileErrors(unsigned int shader, const char* type)
+static void gfxShaderCheckErrors(unsigned int shader, const char* type)
 {
   printf("Checking Shader Errors \n");
   int success;
@@ -39,7 +39,7 @@ void gfxCheckCompileErrors(unsigned int shader, const char* type)
  *
  * @return Shader
  */
-Shader gfxCreateShader(const char* vtx_path, const char* frag_path)
+Shader gfxShaderCreate(const char* vtx_path, const char* frag_path)
 {
   Shader shader;
   shader.vertex_shader_path = vtx_path;
@@ -53,20 +53,20 @@ Shader gfxCreateShader(const char* vtx_path, const char* frag_path)
   vertex = glCreateShader(GL_VERTEX_SHADER);
   glShaderSource(vertex, 1, &vsh_contents, NULL);
   glCompileShader(vertex);
-  gfxCheckCompileErrors(vertex, "VERTEX");
+  gfxShaderCheckErrors(vertex, "VERTEX");
 
   // fragment Shader
   fragment = glCreateShader(GL_FRAGMENT_SHADER);
   glShaderSource(fragment, 1, &fsh_contents, NULL);
   glCompileShader(fragment);
-  gfxCheckCompileErrors(fragment, "FRAGMENT");
+  gfxShaderCheckErrors(fragment, "FRAGMENT");
 
   // shader Program
   shader.program = glCreateProgram();
   glAttachShader(shader.program, vertex);
   glAttachShader(shader.program, fragment);
   glLinkProgram(shader.program);
-  gfxCheckCompileErrors(shader.program, "PROGRAM");
+  gfxShaderCheckErrors(shader.program, "PROGRAM");
   // delete the shaders as they're linked into our program now and no longer necessary
   glDeleteShader(vertex);
   glDeleteShader(fragment);

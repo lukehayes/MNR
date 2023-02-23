@@ -34,7 +34,7 @@ Mat4 Mat4OrthoProjection(OrthoProjection* proj)
 
   matrix.values[0][0] = 2 / (proj->right - proj->left);
   matrix.values[1][1] = 2 / (proj->top - proj->bottom);
-  matrix.values[2][2] = -2 / (proj->near - proj->far);
+  matrix.values[2][2] = -2 / (proj->far - proj->near);
 
   matrix.values[3][0] = -(proj->right + proj->left / proj->right - proj->left );
   matrix.values[3][1] = -(proj->top + proj->bottom / proj->top - proj->bottom );

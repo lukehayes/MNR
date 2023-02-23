@@ -24,11 +24,7 @@ Vec3 Vec3One()
 void Vec3Print(Vec3* v)
 {
   printf("\n");
-  printf("Vec3 \n");
-
-  printf("Vec3: { %.2f, %.2f, %.2f } \n", v->x, v->y, v->z);
-
+  printf("Vec3: { X: %.2f, Y: %.2f, Z: %.2f } \n", v->x, v->y, v->z);
   printf("\n");
-
 }
 

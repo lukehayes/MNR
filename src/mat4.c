@@ -38,10 +38,10 @@ void Mat4Print(Mat4* matrix)
     {
       if(j < 3)
       {
-        printf("| %.2f,", matrix->values[i][j]);
+        printf("| %.2f,", matrix->values[j][i]);
       }else
       {
-        printf("| %.2f", matrix->values[i][j]);
+        printf("| %.2f", matrix->values[j][i]);
         printf("|\n");
       }
     }

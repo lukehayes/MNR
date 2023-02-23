@@ -1,6 +1,8 @@
 #ifndef MATH_MAT4_H
 #define MATH_MAT4_H
 
+#include "math/vec3.h"
+
 typedef struct Mat4
 {
   float values[4][4];
@@ -47,6 +49,13 @@ Mat4 Mat4Identity();
  * @return Mat4.
  */
 Mat4 Mat4OrthoProjection(OrthoProjection* proj);
+
+/**
+ * Create a translation matrix. 
+ *
+ * @return Mat4.
+ */
+void Mat4Translate(Mat4* m, Vec3* v);
 
 
 /* -----------------------------------------------------------------------------

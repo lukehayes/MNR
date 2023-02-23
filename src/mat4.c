@@ -44,6 +44,14 @@ Mat4 Mat4OrthoProjection(OrthoProjection* proj)
   return matrix;
 }
 
+void Mat4Translate(Mat4* m, Vec3* v)
+{
+  m->values[3][0] = v->x;
+  m->values[3][1] = v->y;
+  m->values[3][2] = v->z;
+  m->values[3][3] = 1;
+}
+
 void Mat4Print(Mat4* matrix)
 {
   printf("\n");

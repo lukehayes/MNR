@@ -18,6 +18,10 @@ typedef struct OrthoProjection
 
 } OrthoProjection;
 
+/* -----------------------------------------------------------------------------
+  Matrix Creation
+------------------------------------------------------------------------------*/
+
 /**
  * Create a Mat4 with all values set to zero.
  *
@@ -32,12 +36,22 @@ Mat4 Mat4Zero();
  */
 Mat4 Mat4Identity();
 
+
+/* -----------------------------------------------------------------------------
+  Matrix Projection
+------------------------------------------------------------------------------*/
+
 /**
  * Create an orthographic projection matrix.
  *
  * @return Mat4.
  */
 Mat4 Mat4OrthoProjection(OrthoProjection* proj);
+
+
+/* -----------------------------------------------------------------------------
+  Printing Utility Functions
+------------------------------------------------------------------------------*/
 
 /**
  * Print a Mat4 to stdout.

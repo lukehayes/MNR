@@ -5,6 +5,9 @@
 
 #include "gfx/shader.h"
 
+#include "math/vec3.h"
+#include "math/mat4.h"
+
 float c = 0.0;
 
 #if MNR_DEBUG == 1
@@ -80,6 +83,28 @@ int main(void)
         
     // End of GL Setup
     // ------------------------------------------------------------
+    OrthoProjection proj = {
+        .top = 0.0,
+        .bottom = 600.0,
+        .left = 0.0,
+        .right = 800.0,
+        .near = .1,
+        .far = 10.0
+    };
+
+
+    Mat4 im = Mat4Identity();
+    Mat4 orthoProj = Mat4OrthoProjection(&proj);
+    Vec3 v = Vec3Create(100,200,300);
+    Vec3Print(&v);
+
+    Mat4Print(&orthoProj);
+
+    GLuint location = glGetUniformLocation(shader.program,"projection");
+
+    glUniformMatrix4fv(location, 1, GL_TRUE, 
+                      &im.values[0][0]);
+
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))

@@ -7,6 +7,17 @@ typedef struct Mat4
 
 } Mat4;
 
+typedef struct OrthoProjection
+{
+  float top;
+  float bottom;
+  float left;
+  float right;
+  float near;
+  float far;
+
+} OrthoProjection;
+
 /**
  * Create a Mat4 with all values set to zero.
  *
@@ -20,6 +31,15 @@ Mat4 Mat4Zero();
  * @return Mat4.
  */
 Mat4 Mat4Identity();
+
+/**
+ * Create an orthographic projection matrix.
+ *
+ * @return Mat4.
+ */
+Mat4 Mat4OrthoProjection(OrthoProjection* proj);
+
+
 
 /**
  * Print a Mat4 to stdout.

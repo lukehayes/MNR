@@ -3,4 +3,5 @@ add_library(MNR
   glad.c
   shader.c
   mat4.c
+  vec3.c
 )

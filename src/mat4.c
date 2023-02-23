@@ -64,3 +64,9 @@ void Mat4Print(Mat4* matrix)
   }
   printf("\n");
 }
+
+void Mat4PrintValue(Mat4* mat,int x, int y)
+{
+  printf("Matrix Value: %f \n", mat->values[x][y]);
+}
+

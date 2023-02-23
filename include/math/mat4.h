@@ -39,13 +39,21 @@ Mat4 Mat4Identity();
  */
 Mat4 Mat4OrthoProjection(OrthoProjection* proj);
 
-
-
 /**
  * Print a Mat4 to stdout.
  *
  * @return Mat4.
  */
 void Mat4Print(Mat4* matrix);
+
+/**
+ * Print a specific Mat4 value to stdout.
+ *
+ * @param int x.
+ * @param int y.
+ *
+ * @return Mat4.
+ */
+void Mat4PrintValue(Mat4* mat,int x, int y);
 
 #endif // MATH_MAT4_H

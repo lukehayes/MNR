@@ -44,11 +44,11 @@ Mat4 Mat4OrthoProjection(OrthoProjection* proj)
   return matrix;
 }
 
-void Mat4Translate(Mat4* m, Vec3* v)
+void Mat4Translate(Mat4* m, Vec3 v)
 {
-  m->values[3][0] = v->x;
-  m->values[3][1] = v->y;
-  m->values[3][2] = v->z;
+  m->values[3][0] = v.x;
+  m->values[3][1] = v.y;
+  m->values[3][2] = v.z;
   m->values[3][3] = 1;
 }
 
@@ -76,12 +76,12 @@ void Mat4MultVec(Mat4* m, Vec3 vec)
 
 }
 
-float Mat4GetValue(Mat4* m, int column, int row)
+float Mat4GetValue(const Mat4* m, int column, int row)
 {
   return m->values[column][row];
 }
 
-void Mat4Print(Mat4* matrix)
+void Mat4Print(Mat4 matrix)
 {
   printf("\n");
   printf("Mat4 \n");
@@ -91,10 +91,10 @@ void Mat4Print(Mat4* matrix)
     {
       if(j < 3)
       {
-        printf("| %.2f,", matrix->values[j][i]);
+        printf("| %.2f,", matrix.values[j][i]);
       }else
       {
-        printf("| %.2f", matrix->values[j][i]);
+        printf("| %.2f", matrix.values[j][i]);
         printf("|\n");
       }
     }

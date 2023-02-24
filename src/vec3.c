@@ -21,10 +21,10 @@ Vec3 Vec3One()
   return v;
 }
 
-void Vec3Print(Vec3* v)
+void Vec3Print(Vec3 v)
 {
   printf("\n");
-  printf("Vec3: { X: %.2f, Y: %.2f, Z: %.2f, W:%.2f } \n", v->x, v->y, v->z, v->w);
+  printf("Vec3: { X: %.2f, Y: %.2f, Z: %.2f, W:%.2f } \n", v.x, v.y, v.z, v.w);
   printf("\n");
 }
 

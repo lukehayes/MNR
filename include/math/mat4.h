@@ -55,7 +55,7 @@ Mat4 Mat4OrthoProjection(OrthoProjection* proj);
  *
  * @return Mat4.
  */
-void Mat4Translate(Mat4* m, Vec3* v);
+void Mat4Translate(Mat4* m, Vec3 v);
 
 /* -----------------------------------------------------------------------------
   Matrix Math
@@ -76,7 +76,7 @@ void Mat4MultVec(Mat4* m, Vec3 vec);
  *
  * @return float.
  */
-float Mat4GetValue(Mat4* m, int column, int row);
+float Mat4GetValue(const Mat4* m, int column, int row);
 
 /* -----------------------------------------------------------------------------
   Printing Utility Functions
@@ -87,7 +87,7 @@ float Mat4GetValue(Mat4* m, int column, int row);
  *
  * @return Mat4.
  */
-void Mat4Print(Mat4* matrix);
+void Mat4Print(Mat4 matrix);
 
 /**
  * Print a specific Mat4 value to stdout.

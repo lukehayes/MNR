@@ -12,8 +12,8 @@
   Useful Constants.
 ------------------------------------------------------------------------------*/
 float c = 0.0;
-const float WIDTH  = 800.0;
-const float HEIGHT = 600.0;
+const float WIDTH  = 1920.0;
+const float HEIGHT = 1080.0;
 
 /* -----------------------------------------------------------------------------
   Macros
@@ -92,28 +92,31 @@ int main(void)
     // End of GL Setup
     // ------------------------------------------------------------
     OrthoProjection proj = {
-        .top = 0.0,
+        .top = 0,
         .bottom = HEIGHT,
-        .left = 0.0,
+        .left = 0,
         .right = WIDTH,
-        .near = .1,
-        .far = 10.0
+        .near = 0.1,
+        .far = 100.0
     };
 
 
-    Mat4 im = Mat4Identity();
+    LOG("Creating Orthographic Projection Matrix");
     Mat4 orthoProj = Mat4OrthoProjection(&proj);
+
+    LOG("Creating Position Vector");
     Vec3 v = Vec3Create(0,0,0);
-    Vec3Print(&v);
 
-    Mat4Print(&orthoProj);
 
+    LOG("Creating Model Identity Matrix");
     Mat4 modelMatrix = Mat4Identity();
 
+    LOG("Sending Model Matrix Uniform");
     GLuint modelLoc = glGetUniformLocation(shader.program,"model");
     glUniformMatrix4fv(modelLoc, 1, GL_TRUE, 
                       &modelMatrix.values[0][0]);
 
+    LOG("Sending Projection Matrix Uniform");
     GLuint projectionLoc = glGetUniformLocation(shader.program,"projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_TRUE, 
                       &orthoProj.values[0][0]);
@@ -132,9 +135,8 @@ int main(void)
         v.x = cos(c);
         v.y = sin(c);
 
-        Mat4Translate(&modelMatrix, &v);
-
-        Mat4Print(&orthoProj);
+        Mat4Translate(&modelMatrix, v);
+        // Mat4Print(orthoProj);
 
     GLuint modelLoc = glGetUniformLocation(shader.program,"model");
     glUniformMatrix4fv(modelLoc, 1, GL_TRUE, 
@@ -142,7 +144,7 @@ int main(void)
 
     GLuint projectionLoc = glGetUniformLocation(shader.program,"projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_TRUE, 
-                      &im.values[0][0]);
+                      &orthoProj.values[0][0]);
 
         glBindBuffer( GL_ARRAY_BUFFER, vbo);
 

@@ -41,6 +41,6 @@ Vec3 Vec3One();
  *
  * @return Vec3.
  */
-void Vec3Print(Vec3* v);
+void Vec3Print(Vec3 v);
 
 #endif // MATH_VEC3_H

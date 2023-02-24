@@ -8,7 +8,12 @@
 #include "math/vec3.h"
 #include "math/mat4.h"
 
+/* -----------------------------------------------------------------------------
+  Useful Constants.
+------------------------------------------------------------------------------*/
 float c = 0.0;
+const float WIDTH  = 800.0;
+const float HEIGHT = 600.0;
 
 #if MNR_DEBUG == 1
 #define LOG(x) (printf("LOG: %s \n", x))
@@ -30,7 +35,7 @@ int main(void)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(800, 600, "app", NULL, NULL);
+    window = glfwCreateWindow(WIDTH, HEIGHT, "app", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -85,9 +90,9 @@ int main(void)
     // ------------------------------------------------------------
     OrthoProjection proj = {
         .top = 0.0,
-        .bottom = 600.0,
+        .bottom = HEIGHT,
         .left = 0.0,
-        .right = 800.0,
+        .right = WIDTH,
         .near = .1,
         .far = 10.0
     };

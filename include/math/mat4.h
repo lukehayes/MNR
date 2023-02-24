@@ -57,6 +57,20 @@ Mat4 Mat4OrthoProjection(OrthoProjection* proj);
  */
 void Mat4Translate(Mat4* m, Vec3* v);
 
+/* -----------------------------------------------------------------------------
+  Matrix Math
+------------------------------------------------------------------------------*/
+
+/**
+ * Multiply a Mat4 by a Vec3.
+ *
+ * @param Mat4* m.
+ * @param Vec3 v.
+ *
+ * @return void.
+ */
+void Mat4MultVec(Mat4* m, Vec3 vec);
+
 
 /* -----------------------------------------------------------------------------
   Printing Utility Functions

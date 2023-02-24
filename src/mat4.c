@@ -52,6 +52,30 @@ void Mat4Translate(Mat4* m, Vec3* v)
   m->values[3][3] = 1;
 }
 
+void Mat4MultVec(Mat4* m, Vec3 vec)
+{
+  m->values[0][0] = m->values[0][0] * vec.x;
+  m->values[0][1] = m->values[0][1] * vec.x;
+  m->values[0][2] = m->values[0][2] * vec.x;
+  m->values[0][3] = m->values[0][3] * vec.x;
+                                   
+  m->values[1][0] = m->values[1][0] * vec.y;
+  m->values[1][1] = m->values[1][1] * vec.y;
+  m->values[1][2] = m->values[1][2] * vec.y;
+  m->values[1][3] = m->values[1][3] * vec.y;
+                                   
+  m->values[2][0] = m->values[2][0] * vec.z;
+  m->values[2][1] = m->values[2][1] * vec.z;
+  m->values[2][2] = m->values[2][2] * vec.z;
+  m->values[2][3] = m->values[2][3] * vec.z;
+                                   
+  m->values[3][0] = m->values[3][0] * vec.w;
+  m->values[3][1] = m->values[3][1] * vec.w;
+  m->values[3][2] = m->values[3][2] * vec.w;
+  m->values[3][3] = m->values[3][3] * vec.w;
+
+}
+
 void Mat4Print(Mat4* matrix)
 {
   printf("\n");

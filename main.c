@@ -15,6 +15,9 @@ float c = 0.0;
 const float WIDTH  = 800.0;
 const float HEIGHT = 600.0;
 
+/* -----------------------------------------------------------------------------
+  Macros
+------------------------------------------------------------------------------*/
 #if MNR_DEBUG == 1
 #define LOG(x) (printf("LOG: %s \n", x))
 #else
@@ -100,15 +103,20 @@ int main(void)
 
     Mat4 im = Mat4Identity();
     Mat4 orthoProj = Mat4OrthoProjection(&proj);
-    Vec3 v = Vec3Create(100,200,300);
+    Vec3 v = Vec3Create(0,0,0);
     Vec3Print(&v);
 
     Mat4Print(&orthoProj);
 
-    GLuint location = glGetUniformLocation(shader.program,"projection");
+    Mat4 modelMatrix = Mat4Identity();
 
-    glUniformMatrix4fv(location, 1, GL_TRUE, 
-                      &im.values[0][0]);
+    GLuint modelLoc = glGetUniformLocation(shader.program,"model");
+    glUniformMatrix4fv(modelLoc, 1, GL_TRUE, 
+                      &modelMatrix.values[0][0]);
+
+    GLuint projectionLoc = glGetUniformLocation(shader.program,"projection");
+    glUniformMatrix4fv(projectionLoc, 1, GL_TRUE, 
+                      &orthoProj.values[0][0]);
 
 
     /* Loop until the user closes the window */
@@ -120,6 +128,21 @@ int main(void)
         glClearColor(0.2, 0.2, 0.2, sin(c));
 
         glUseProgram(shader.program);
+
+        v.x = cos(c);
+        v.y = sin(c);
+
+        Mat4Translate(&modelMatrix, &v);
+
+        Mat4Print(&orthoProj);
+
+    GLuint modelLoc = glGetUniformLocation(shader.program,"model");
+    glUniformMatrix4fv(modelLoc, 1, GL_TRUE, 
+                      &modelMatrix.values[0][0]);
+
+    GLuint projectionLoc = glGetUniformLocation(shader.program,"projection");
+    glUniformMatrix4fv(projectionLoc, 1, GL_TRUE, 
+                      &im.values[0][0]);
 
         glBindBuffer( GL_ARRAY_BUFFER, vbo);
 

@@ -76,6 +76,11 @@ void Mat4MultVec(Mat4* m, Vec3 vec)
 
 }
 
+float Mat4GetValue(Mat4* m, int column, int row)
+{
+  return m->values[column][row];
+}
+
 void Mat4Print(Mat4* matrix)
 {
   printf("\n");

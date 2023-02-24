@@ -71,6 +71,12 @@ void Mat4Translate(Mat4* m, Vec3* v);
  */
 void Mat4MultVec(Mat4* m, Vec3 vec);
 
+/**
+ * Get a specific value from a Mat4 matrix in COLUMN MAJOR order.
+ *
+ * @return float.
+ */
+float Mat4GetValue(Mat4* m, int column, int row);
 
 /* -----------------------------------------------------------------------------
   Printing Utility Functions

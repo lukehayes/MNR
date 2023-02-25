@@ -46,6 +46,15 @@ Vec3 Vec3One();
 int Vec3Length(Vec3 v);
 
 /**
+ * Normalize a Vec3 - reduce its length to 1 (a unit vector).
+ *
+ * @param Vec3 v.
+ *
+ * @return Vec3.
+ */
+Vec3 Vec3Normalize(Vec3 v);
+
+/**
  * Print a Vec3 to stdout.
  *
  * @return Vec3.

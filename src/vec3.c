@@ -26,6 +26,16 @@ int Vec3Length(Vec3 v)
 {
   return sqrt((v.x * v.x) + (v.y * v.y) + (v.z * v.z));
 }
+
+Vec3 Vec3Normalize(Vec3 v)
+{
+  int vectorLength = Vec3Length(v);
+
+  return (Vec3){
+    v.x / vectorLength,
+    v.y / vectorLength,
+    v.z / vectorLength,
+  };
 }
 
 void Vec3Print(Vec3 v)

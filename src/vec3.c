@@ -1,5 +1,6 @@
 #include "math/vec3.h"
 #include <stdio.h>
+#include <math.h>
 
 
 Vec3 Vec3Create(float x, float y, float z)
@@ -19,6 +20,11 @@ Vec3 Vec3One()
 {
   Vec3 v = {.x = 1, .y = 1, .z = 1, .w = 1};
   return v;
+}
+
+int Vec3Length(Vec3 v)
+{
+  return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
 }
 
 void Vec3Print(Vec3 v)

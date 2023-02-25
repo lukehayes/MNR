@@ -37,6 +37,15 @@ Vec3 Vec3Zero();
 Vec3 Vec3One();
 
 /**
+ * Get the length/magnitude of a Vec3.
+ *
+ * @param Vec3 v.
+ *
+ * @return Vec3.
+ */
+int Vec3Length(Vec3 v);
+
+/**
  * Print a Vec3 to stdout.
  *
  * @return Vec3.

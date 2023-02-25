@@ -24,7 +24,8 @@ Vec3 Vec3One()
 
 int Vec3Length(Vec3 v)
 {
-  return sqrt(v.x * v.x + v.y * v.y + v.z * v.z);
+  return sqrt((v.x * v.x) + (v.y * v.y) + (v.z * v.z));
+}
 }
 
 void Vec3Print(Vec3 v)

@@ -51,6 +51,14 @@ Mat4 Mat4Identity();
 Mat4 Mat4OrthoProjection(OrthoProjection* proj);
 
 /**
+ * Create an orthographic projection matrix.
+ *
+ * @return Mat4.
+ */
+Mat4 Mat4LookAt(Vec3 eye, Vec3 target, Vec3 up);
+
+
+/**
  * Create a translation matrix. 
  *
  * @return Mat4.

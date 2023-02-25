@@ -44,6 +44,24 @@ Mat4 Mat4OrthoProjection(OrthoProjection* proj)
   return matrix;
 }
 
+Mat4 Mat4LookAt(Vec3 eye, Vec3 target, Vec3 up)
+{
+  Vec3 zaxis = normalize(target - eye);    
+  Vec3 xaxis = normalize(cross(zaxis, up));
+  Vec3 yaxis = cross(xaxis, zaxis);
+
+  negate(zaxis);
+
+  mat4 viewMatrix = {
+    vec4(xaxis.x, xaxis.y, xaxis.z, -dot(xaxis, eye)),
+    vec4(yaxis.x, yaxis.y, yaxis.z, -dot(yaxis, eye)),
+    vec4(zaxis.x, zaxis.y, zaxis.z, -dot(zaxis, eye)),
+    vec4(0, 0, 0, 1)
+  };
+
+  return viewMatrix;
+}
+
 void Mat4Translate(Mat4* m, Vec3 v)
 {
   m->values[3][0] = v.x;

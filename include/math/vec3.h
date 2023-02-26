@@ -64,6 +64,46 @@ Vec3 Vec3Normalize(Vec3 v);
 Vec3 Vec3Negate(Vec3 v);
 
 /**
+ * Subtract one Vec3 from another.
+ *
+ * @param Vec3 a.
+ * @param Vec3 b.
+ *
+ * @return Vec3
+ */
+Vec3 Vec3Subtract(Vec3 a, Vec3 b);
+
+/**
+ * Add one Vec3 to another.
+ *
+ * @param Vec3 a.
+ * @param Vec3 b.
+ *
+ * @return Vec3
+ */
+Vec3 Vec3Add(Vec3 a, Vec3 b);
+
+/**
+ * Get the cross product of two vectors.
+ *
+ * @param Vec3 a.
+ * @param Vec3 b.
+ *
+ * @return Vec3
+ */
+Vec3 Vec3Cross(Vec3 a, Vec3 b);
+
+/**
+ * Get the dot product of two vectors.
+ *
+ * @param Vec3 a.
+ * @param Vec3 b.
+ *
+ * @return float.
+ */
+float Vec3Dot(Vec3 a, Vec3 b);
+
+/**
  * Print a Vec3 to stdout.
  *
  * @return Vec3.

@@ -46,20 +46,43 @@ Mat4 Mat4OrthoProjection(OrthoProjection* proj)
 
 Mat4 Mat4LookAt(Vec3 eye, Vec3 target, Vec3 up)
 {
-  Vec3 zaxis = normalize(target - eye);    
-  Vec3 xaxis = normalize(cross(zaxis, up));
-  Vec3 yaxis = cross(xaxis, zaxis);
+  Vec3 zaxis = Vec3Normalize(Vec3Subtract(target, eye));
+  Vec3 xaxis = Vec3Normalize(Vec3Cross(zaxis, up));
+  Vec3 yaxis = Vec3Cross(xaxis, zaxis);
 
-  negate(zaxis);
+  zaxis = Vec3Negate(zaxis);
 
-  mat4 viewMatrix = {
-    vec4(xaxis.x, xaxis.y, xaxis.z, -dot(xaxis, eye)),
-    vec4(yaxis.x, yaxis.y, yaxis.z, -dot(yaxis, eye)),
-    vec4(zaxis.x, zaxis.y, zaxis.z, -dot(zaxis, eye)),
-    vec4(0, 0, 0, 1)
-  };
+  // Mat4 viewMatrix = {
+  //   vec4(xaxis.x, xaxis.y, xaxis.z, -dot(xaxis, eye)),
+  //   vec4(yaxis.x, yaxis.y, yaxis.z, -dot(yaxis, eye)),
+  //   vec4(zaxis.x, zaxis.y, zaxis.z, -dot(zaxis, eye)),
+  //   vec4(0, 0, 0, 1)
+  // };
 
-  return viewMatrix;
+  Mat4 vm = Mat4Identity();
+
+  vm.values[0][0] =  xaxis.x;
+  vm.values[0][1] =  xaxis.y;
+  vm.values[0][2] =  xaxis.z;
+  vm.values[0][3] =  -Vec3Dot(zaxis, eye);
+                   
+
+  vm.values[1][0] =  yaxis.x;
+  vm.values[1][1] =  yaxis.y;
+  vm.values[1][2] =  yaxis.z;
+  vm.values[1][3] =  -Vec3Dot(yaxis, eye);
+
+  vm.values[2][0] =  zaxis.x;
+  vm.values[2][1] =  zaxis.y;
+  vm.values[2][2] =  zaxis.z;
+  vm.values[2][3] =  -Vec3Dot(zaxis, eye);
+
+  vm.values[3][0] =  0;
+  vm.values[3][1] =  0;
+  vm.values[3][2] =  0;
+  vm.values[3][3] =  1;
+
+  return vm;
 }
 
 void Mat4Translate(Mat4* m, Vec3 v)

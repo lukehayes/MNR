@@ -55,6 +55,15 @@ int Vec3Length(Vec3 v);
 Vec3 Vec3Normalize(Vec3 v);
 
 /**
+ * Minus every value inside the Vec3 and return a new Vec3.
+ *
+ * @param Vec3 v.
+ *
+ * @return Vec3.
+ */
+Vec3 Vec3Negate(Vec3 v);
+
+/**
  * Print a Vec3 to stdout.
  *
  * @return Vec3.

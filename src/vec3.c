@@ -38,6 +38,15 @@ Vec3 Vec3Normalize(Vec3 v)
   };
 }
 
+Vec3 Vec3Negate(Vec3 v)
+{
+  return (Vec3){
+    -v.x,
+    -v.y,
+    -v.z,
+  };
+}
+
 void Vec3Print(Vec3 v)
 {
   printf("\n");

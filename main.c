@@ -12,8 +12,8 @@
   Useful Constants.
 ------------------------------------------------------------------------------*/
 float c = 0.0;
-const float WIDTH  = 1920.0;
-const float HEIGHT = 1080.0;
+const float WIDTH  = 800.0;
+const float HEIGHT = 600.0;
 
 /* -----------------------------------------------------------------------------
   Macros
@@ -96,8 +96,8 @@ int main(void)
         .bottom = HEIGHT,
         .left = 0,
         .right = WIDTH,
-        .near = 0.1,
-        .far = 100.0
+        .near = 0.0001,
+        .far = 1000.0
     };
 
 
@@ -106,7 +106,9 @@ int main(void)
 
     LOG("Creating Position Vector");
     Vec3 v = Vec3Create(0,0,0);
+    Vec3 pos = Vec3Create(0,0,0);
 
+    Mat4 viewMatrix = Mat4LookAt((Vec3){0,0,-3}, pos, (Vec3){0,1,0});
 
     LOG("Creating Model Identity Matrix");
     Mat4 modelMatrix = Mat4Identity();
@@ -115,6 +117,11 @@ int main(void)
     GLuint modelLoc = glGetUniformLocation(shader.program,"model");
     glUniformMatrix4fv(modelLoc, 1, GL_TRUE, 
                       &modelMatrix.values[0][0]);
+
+    LOG("Sending View Matrix Uniform");
+    GLuint viewLoc = glGetUniformLocation(shader.program,"view");
+    glUniformMatrix4fv(viewLoc, 1, GL_TRUE, 
+                      &viewMatrix.values[0][0]);
 
     LOG("Sending Projection Matrix Uniform");
     GLuint projectionLoc = glGetUniformLocation(shader.program,"projection");
@@ -131,16 +138,22 @@ int main(void)
         glClearColor(0.2, 0.2, 0.2, sin(c));
 
         glUseProgram(shader.program);
+        
+        pos.x = cos(c);
+        pos.y = sin(c);
+        Mat4Translate(&modelMatrix, pos);
 
-        v.x = cos(c);
-        v.y = sin(c);
-
-        Mat4Translate(&modelMatrix, v);
+        viewMatrix = Mat4LookAt((Vec3){0,0,-3}, pos, (Vec3){0,1,0});
+        
         // Mat4Print(orthoProj);
 
     GLuint modelLoc = glGetUniformLocation(shader.program,"model");
     glUniformMatrix4fv(modelLoc, 1, GL_TRUE, 
                       &modelMatrix.values[0][0]);
+
+    GLuint viewLoc = glGetUniformLocation(shader.program,"view");
+    glUniformMatrix4fv(viewLoc, 1, GL_TRUE, 
+                      &viewMatrix.values[0][0]);
 
     GLuint projectionLoc = glGetUniformLocation(shader.program,"projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_TRUE, 

@@ -24,6 +24,34 @@ const float HEIGHT = 600.0;
 #define LOG(x)
 #endif
 
+
+float* Mat4ArrayFromValues(Mat4 m, float matrixArray[16])
+{
+    matrixArray[0] =  m.m0;
+    matrixArray[1] =  m.m1;
+    matrixArray[2] =  m.m2;
+    matrixArray[3] =  m.m3;
+
+    matrixArray[4] =  m.m4;
+    matrixArray[5] =  m.m5;
+    matrixArray[6] =  m.m6;
+    matrixArray[7] =  m.m7;
+
+    matrixArray[8] =  m.m8;
+    matrixArray[9] =  m.m9;
+    matrixArray[10] =  m.m10;
+    matrixArray[11] =  m.m11;
+
+    matrixArray[12] =  m.m12;
+    matrixArray[13] =  m.m13;
+    matrixArray[14] =  m.m14;
+    matrixArray[15] =  m.m15;
+
+    return matrixArray;
+}
+
+
+
 int main(void)
 {
     GLFWwindow* window;
@@ -113,20 +141,29 @@ int main(void)
     LOG("Creating Model Identity Matrix");
     Mat4 modelMatrix = Mat4Identity();
 
+    float modelMatArray[16];
+    Mat4ArrayFromValues(modelMatrix, modelMatArray);
+
     LOG("Sending Model Matrix Uniform");
     GLuint modelLoc = glGetUniformLocation(shader.program,"model");
     glUniformMatrix4fv(modelLoc, 1, GL_TRUE, 
-                      &modelMatrix.values[0][0]);
+                      modelMatArray);
+
+    float viewMatArray[16];
+    Mat4ArrayFromValues(viewMatrix, viewMatArray);
 
     LOG("Sending View Matrix Uniform");
     GLuint viewLoc = glGetUniformLocation(shader.program,"view");
     glUniformMatrix4fv(viewLoc, 1, GL_TRUE, 
-                      &viewMatrix.values[0][0]);
+                      viewMatArray);
+
+    float projMatArray[16];
+    Mat4ArrayFromValues(orthoProj, projMatArray);
 
     LOG("Sending Projection Matrix Uniform");
     GLuint projectionLoc = glGetUniformLocation(shader.program,"projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_TRUE, 
-                      &orthoProj.values[0][0]);
+                      projMatArray);
 
 
     /* Loop until the user closes the window */
@@ -143,21 +180,39 @@ int main(void)
         pos.y = sin(c);
         Mat4Translate(&modelMatrix, pos);
 
-        viewMatrix = Mat4LookAt((Vec3){0,0,-3}, pos, (Vec3){0,1,0});
+        viewMatrix = Mat4LookAt(
+            (Vec3){0,0,0},
+            (Vec3){0,0,0} ,
+            (Vec3){0,1,0}
+        );
         
         // Mat4Print(orthoProj);
 
+    
+    float modelMatArray[16];
+    Mat4ArrayFromValues(modelMatrix, modelMatArray);
+
     GLuint modelLoc = glGetUniformLocation(shader.program,"model");
     glUniformMatrix4fv(modelLoc, 1, GL_TRUE, 
-                      &modelMatrix.values[0][0]);
+                      modelMatArray);
+
+    float viewMatArray[16];
+    Mat4ArrayFromValues(viewMatrix, viewMatArray);
 
     GLuint viewLoc = glGetUniformLocation(shader.program,"view");
     glUniformMatrix4fv(viewLoc, 1, GL_TRUE, 
-                      &viewMatrix.values[0][0]);
+                      viewMatArray);
+
+    float projMatArray[16];
+    Mat4ArrayFromValues(orthoProj, projMatArray);
 
     GLuint projectionLoc = glGetUniformLocation(shader.program,"projection");
     glUniformMatrix4fv(projectionLoc, 1, GL_TRUE, 
-                      &orthoProj.values[0][0]);
+                      projMatArray);
+
+
+
+
 
         glBindBuffer( GL_ARRAY_BUFFER, vbo);
 

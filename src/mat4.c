@@ -5,13 +5,25 @@ Mat4 Mat4Zero()
 {
   Mat4 matrix;
 
-  for(int i = 0; i <= 3; i++)
-  {
-    for(int j = 0; j <= 3; j++)
-    {
-      matrix.values[i][j] = 0;
-    }
-  }
+  matrix.m0  = 0;
+  matrix.m1  = 0;
+  matrix.m2  = 0;
+  matrix.m3  = 0;
+
+  matrix.m4  = 0;
+  matrix.m5  = 0;
+  matrix.m6  = 0;
+  matrix.m7  = 0;
+
+  matrix.m8  = 0;
+  matrix.m9  = 0;
+  matrix.m10 = 0;
+  matrix.m11 = 0;
+
+  matrix.m12 = 0;
+  matrix.m13 = 0;
+  matrix.m14 = 0;
+  matrix.m15 = 0;
 
   return matrix;
 }
@@ -20,10 +32,10 @@ Mat4 Mat4Identity()
 {
   Mat4 matrix = Mat4Zero();
 
-  matrix.values[0][0] = 1.0;
-  matrix.values[1][1] = 1.0;
-  matrix.values[2][2] = 1.0;
-  matrix.values[3][3] = 1.0;
+  matrix.m0  = 1.0;
+  matrix.m5  = 1.0;
+  matrix.m10 = 1.0;
+  matrix.m15 = 1.0;
 
   return matrix;
 }
@@ -32,14 +44,15 @@ Mat4 Mat4OrthoProjection(OrthoProjection* proj)
 {
   Mat4 matrix = Mat4Identity();
 
-  matrix.values[0][0] =  2 / (proj->right - proj->left);
-  matrix.values[1][1] =  2 / (proj->top   - proj->bottom);
-  matrix.values[2][2] = -2 / (proj->far   - proj->near);
 
-  matrix.values[3][0] = -(proj->right + proj->left   / proj->right - proj->left );
-  matrix.values[3][1] = -(proj->top   + proj->bottom / proj->top   - proj->bottom );
-  matrix.values[3][2] = -(proj->far   + proj->near   / proj->far   - proj->near );
-  matrix.values[3][3] = 1;
+  matrix.m0  =  2 / (proj->right - proj->left);
+  matrix.m5  =  2 / (proj->top   - proj->bottom);
+  matrix.m10 = -2 / (proj->far   - proj->near);
+
+  matrix.m12 = -(proj->right + proj->left   / proj->right - proj->left );
+  matrix.m13 = -(proj->top   + proj->bottom / proj->top   - proj->bottom );
+  matrix.m14 = -(proj->far   + proj->near   / proj->far   - proj->near );
+  matrix.m15 = 1;
 
   return matrix;
 }
@@ -61,90 +74,90 @@ Mat4 Mat4LookAt(Vec3 eye, Vec3 target, Vec3 up)
 
   Mat4 vm = Mat4Identity();
 
-  vm.values[0][0] =  xaxis.x;
-  vm.values[0][1] =  xaxis.y;
-  vm.values[0][2] =  xaxis.z;
-  vm.values[0][3] =  -Vec3Dot(zaxis, eye);
+  vm.m0  =  xaxis.x;
+  vm.m1  =  xaxis.y;
+  vm.m2  =  xaxis.z;
+  vm.m3  =  -Vec3Dot(zaxis, eye);
                    
 
-  vm.values[1][0] =  yaxis.x;
-  vm.values[1][1] =  yaxis.y;
-  vm.values[1][2] =  yaxis.z;
-  vm.values[1][3] =  -Vec3Dot(yaxis, eye);
+  vm.m4  =  yaxis.x;
+  vm.m5  =  yaxis.y;
+  vm.m6  =  yaxis.z;
+  vm.m7  =  -Vec3Dot(yaxis, eye);
 
-  vm.values[2][0] =  zaxis.x;
-  vm.values[2][1] =  zaxis.y;
-  vm.values[2][2] =  zaxis.z;
-  vm.values[2][3] =  -Vec3Dot(zaxis, eye);
+  vm.m8  =  zaxis.x;
+  vm.m9  =  zaxis.y;
+  vm.m10 =  zaxis.z;
+  vm.m11 =  -Vec3Dot(zaxis, eye);
 
-  vm.values[3][0] =  0;
-  vm.values[3][1] =  0;
-  vm.values[3][2] =  0;
-  vm.values[3][3] =  1;
+  vm.m12 =  0;
+  vm.m13 =  0;
+  vm.m14 =  0;
+  vm.m15 =  1;
 
   return vm;
 }
 
 void Mat4Translate(Mat4* m, Vec3 v)
 {
-  m->values[3][0] = v.x;
-  m->values[3][1] = v.y;
-  m->values[3][2] = v.z;
-  m->values[3][3] = 1;
+  m->m12 = v.x;
+  m->m13 = v.y;
+  m->m14 = v.z;
+  m->m15 = 1.0;
 }
 
 void Mat4MultVec(Mat4* m, Vec3 vec)
 {
-  m->values[0][0] = m->values[0][0] * vec.x;
-  m->values[0][1] = m->values[0][1] * vec.x;
-  m->values[0][2] = m->values[0][2] * vec.x;
-  m->values[0][3] = m->values[0][3] * vec.x;
-                                   
-  m->values[1][0] = m->values[1][0] * vec.y;
-  m->values[1][1] = m->values[1][1] * vec.y;
-  m->values[1][2] = m->values[1][2] * vec.y;
-  m->values[1][3] = m->values[1][3] * vec.y;
-                                   
-  m->values[2][0] = m->values[2][0] * vec.z;
-  m->values[2][1] = m->values[2][1] * vec.z;
-  m->values[2][2] = m->values[2][2] * vec.z;
-  m->values[2][3] = m->values[2][3] * vec.z;
-                                   
-  m->values[3][0] = m->values[3][0] * vec.w;
-  m->values[3][1] = m->values[3][1] * vec.w;
-  m->values[3][2] = m->values[3][2] * vec.w;
-  m->values[3][3] = m->values[3][3] * vec.w;
+  m->m0  = m->m0  * vec.x;
+  m->m1  = m->m1  * vec.x;
+  m->m2  = m->m2  * vec.x;
+  m->m3  = m->m3  * vec.x;
+
+  m->m4  = m->m4  * vec.y;
+  m->m5  = m->m5  * vec.y;
+  m->m6  = m->m6  * vec.y;
+  m->m7  = m->m7  * vec.y;
+
+  m->m8  = m->m8  * vec.z;
+  m->m9  = m->m9  * vec.z;
+  m->m10 = m->m10 * vec.z;
+  m->m11 = m->m11 * vec.z;
+
+  m->m12 = m->m12 * vec.w;
+  m->m13 = m->m13 * vec.w;
+  m->m14 = m->m14 * vec.w;
+  m->m15 = m->m15 * vec.w;
 
 }
 
 float Mat4GetValue(const Mat4* m, int column, int row)
 {
-  return m->values[column][row];
+  // return m->values[column][row];
 }
 
-void Mat4Print(Mat4 matrix)
-{
-  printf("\n");
-  printf("Mat4 \n");
-  for(int i = 0; i <= 3; i++)
-  {
-    for(int j = 0; j <= 3; j++)
-    {
-      if(j < 3)
-      {
-        printf("| %.2f,", matrix.values[j][i]);
-      }else
-      {
-        printf("| %.2f", matrix.values[j][i]);
-        printf("|\n");
-      }
-    }
-  }
-  printf("\n");
-}
-
-void Mat4PrintValue(Mat4* mat,int x, int y)
-{
-  printf("Matrix Value: %f \n", mat->values[x][y]);
-}
-
+// void Mat4Print(Mat4 matrix)
+// {
+//   printf("\n");
+//   printf("Mat4 \n");
+//   for(int i = 0; i <= 3; i++)
+//   {
+//     for(int j = 0; j <= 3; j++)
+//     {
+//       if(j < 3)
+//       {
+//         printf("| %.2f,", matrix.values[j][i]);
+//       }else
+//       {
+//         printf("| %.2f", matrix.values[j][i]);
+//         printf("|\n");
+//       }
+//     }
+//   }
+//   printf("\n");
+// }
+//
+// void Mat4PrintValue(Mat4* mat,int x, int y)
+// {
+//   printf("Matrix Value: %f \n", mat->values[x][y]);
+// }
+//

@@ -5,7 +5,11 @@
 
 typedef struct Mat4
 {
-  float values[4][4];
+  // Represents a column major matrix;
+  float m0, m4, m8,  m12,
+        m1, m5, m9,  m13,
+        m2, m6, m10, m14,
+        m3, m7, m11, m15;
 
 } Mat4;
 

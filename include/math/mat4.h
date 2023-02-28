@@ -111,4 +111,15 @@ void Mat4Print(Mat4 matrix);
  */
 void Mat4PrintValue(Mat4* mat,int x, int y);
 
+/**
+ * Convert a Mat4 struct to an array of 16 values
+ * and return that array.
+ *
+ * @param Mat4* m.
+ * @param float[16] matrixArray.
+ *
+ * @return Mat4.
+ */
+float* Mat4ToArray(Mat4* m, float matrixArray[16]);
+
 #endif // MATH_MAT4_H

@@ -130,6 +130,32 @@ void Mat4MultVec(Mat4* m, Vec3 vec)
 
 }
 
+float* Mat4ToArray(Mat4* m, float matrixArray[16])
+{
+    matrixArray[0]  = m->m0;
+    matrixArray[1]  = m->m1;
+    matrixArray[2]  = m->m2;
+    matrixArray[3]  = m->m3;
+
+    matrixArray[4]  = m->m4;
+    matrixArray[5]  = m->m5;
+    matrixArray[6]  = m->m6;
+    matrixArray[7]  = m->m7;
+
+    matrixArray[8]  = m->m8;
+    matrixArray[9]  = m->m9;
+    matrixArray[10] = m->m10;
+    matrixArray[11] = m->m11;
+
+    matrixArray[12] = m->m12;
+    matrixArray[13] = m->m13;
+    matrixArray[14] = m->m14;
+    matrixArray[15] = m->m15;
+
+    return matrixArray;
+}
+
+
 float Mat4GetValue(const Mat4* m, int column, int row)
 {
   // return m->values[column][row];

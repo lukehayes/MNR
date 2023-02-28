@@ -77,6 +77,22 @@ Shader gfxShaderCreate(const char* vtx_path, const char* frag_path)
   return shader;
 }
 
+/**
+ * Send a Mat4 uniformm variable to the shader program.
+ *
+ * @pram Shader*          shader.
+ * @pram Mat4*            matrix.
+ * @pram const char*      name.
+ *
+ * @return void.
+ */
+void gfxShaderSendUniformMat4(Shader* shader, Mat4* matrix, const char* name)
+{
+  float matrixArray[16];
+  GLuint uniformLocation = glGetUniformLocation(shader->program, name);
+  glUniformMatrix4fv(uniformLocation, 1, GL_TRUE, Mat4ToArray(matrix, matrixArray));
+}
+
 void gfxShaderDestroy(Shader* shader)
 {
   glDeleteProgram(shader->program);

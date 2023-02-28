@@ -4,4 +4,5 @@ add_library(MNR
   shader.c
   mat4.c
   vec3.c
+  logging.c
 )

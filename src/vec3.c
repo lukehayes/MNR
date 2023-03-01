@@ -6,7 +6,7 @@
 Vec3 Vec3Create(double x, double y, double z)
 {
 
-  Vec3 v = {.x = x, .y = y, .z = z, .w = 1};
+  Vec3 v = {.x = x, .y = y, .z = z, .w = 0};
   return v;
 }
 

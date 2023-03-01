@@ -6,7 +6,7 @@
 typedef struct Mat4
 {
   // Represents a column major matrix;
-  float m0, m4, m8,  m12,
+  double m0, m4, m8,  m12,
         m1, m5, m9,  m13,
         m2, m6, m10, m14,
         m3, m7, m11, m15;
@@ -15,12 +15,12 @@ typedef struct Mat4
 
 typedef struct OrthoProjection
 {
-  float top;
-  float bottom;
-  float left;
-  float right;
-  float near;
-  float far;
+  double top;
+  double bottom;
+  double left;
+  double right;
+  double near;
+  double far;
 
 } OrthoProjection;
 
@@ -86,9 +86,9 @@ void Mat4MultVec(Mat4* m, Vec3 vec);
 /**
  * Get a specific value from a Mat4 matrix in COLUMN MAJOR order.
  *
- * @return float.
+ * @return double.
  */
-float Mat4GetValue(const Mat4* m, int column, int row);
+double Mat4GetValue(const Mat4* m, int column, int row);
 
 /* -----------------------------------------------------------------------------
   Printing Utility Functions
@@ -116,10 +116,10 @@ void Mat4PrintValue(Mat4* mat,int x, int y);
  * and return that array.
  *
  * @param Mat4* m.
- * @param float[16] matrixArray.
+ * @param double[16] matrixArray.
  *
  * @return Mat4.
  */
-float* Mat4ToArray(Mat4* m, float matrixArray[16]);
+double* Mat4ToArray(Mat4* m, double matrixArray[16]);
 
 #endif // MATH_MAT4_H

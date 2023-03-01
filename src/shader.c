@@ -88,9 +88,9 @@ Shader gfxShaderCreate(const char* vtx_path, const char* frag_path)
  */
 void gfxShaderSendUniformMat4(Shader* shader, Mat4* matrix, const char* name)
 {
-  float matrixArray[16];
+  double matrixArray[16];
   GLuint uniformLocation = glGetUniformLocation(shader->program, name);
-  glUniformMatrix4fv(uniformLocation, 1, GL_TRUE, Mat4ToArray(matrix, matrixArray));
+  glUniformMatrix4fv(uniformLocation, 1, GL_TRUE, (float*)Mat4ToArray(matrix, matrixArray));
 }
 
 void gfxShaderDestroy(Shader* shader)

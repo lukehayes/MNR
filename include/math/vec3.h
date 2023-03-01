@@ -3,10 +3,10 @@
 
 typedef struct Vec3
 {
-  float x;
-  float y;
-  float z;
-  float w;
+  double x;
+  double y;
+  double z;
+  double w;
 
 } Vec3;
 
@@ -14,13 +14,13 @@ typedef struct Vec3
 /**
  * Create a new Vec3 with specified values.
  *
- * @param float x.
- * @param float y.
- * @param float z.
+ * @param double x.
+ * @param double y.
+ * @param double z.
  *
  * @return Vec3.
  */
-Vec3 Vec3Create(float x, float y, float z);
+Vec3 Vec3Create(double x, double y, double z);
 
 /**
  * Create a Vec3 with all values set to zero.
@@ -43,7 +43,7 @@ Vec3 Vec3One();
  *
  * @return Vec3.
  */
-int Vec3Length(Vec3 v);
+double Vec3Length(Vec3 v);
 
 /**
  * Normalize a Vec3 - reduce its length to 1 (a unit vector).
@@ -99,9 +99,9 @@ Vec3 Vec3Cross(Vec3 a, Vec3 b);
  * @param Vec3 a.
  * @param Vec3 b.
  *
- * @return float.
+ * @return double.
  */
-float Vec3Dot(Vec3 a, Vec3 b);
+double Vec3Dot(Vec3 a, Vec3 b);
 
 /**
  * Print a Vec3 to stdout.

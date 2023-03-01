@@ -130,7 +130,7 @@ void Mat4MultVec(Mat4* m, Vec3 vec)
 
 }
 
-float* Mat4ToArray(Mat4* m, float matrixArray[16])
+double* Mat4ToArray(Mat4* m, double matrixArray[16])
 {
     matrixArray[0]  = m->m0;
     matrixArray[1]  = m->m1;
@@ -156,7 +156,7 @@ float* Mat4ToArray(Mat4* m, float matrixArray[16])
 }
 
 
-float Mat4GetValue(const Mat4* m, int column, int row)
+double Mat4GetValue(const Mat4* m, int column, int row)
 {
   // return m->values[column][row];
 }
@@ -164,28 +164,28 @@ float Mat4GetValue(const Mat4* m, int column, int row)
 void Mat4Print(Mat4 matrix)
 {
   printf("-----------------------------\n");
-  printf("| %.2f, %.2f, %.2f, %.2f | \n",
+  printf("| %.2lf, %.2lf, %.2lf, %.2lf | \n",
       matrix.m0,
       matrix.m4,
       matrix.m8,
       matrix.m12
   );
 
-  printf("| %.2f, %.2f, %.2f, %.2f | \n",
+  printf("| %.2lf, %.2lf, %.2lf, %.2lf | \n",
       matrix.m1,
       matrix.m5,
       matrix.m9,
       matrix.m13
   );
 
-  printf("| %.2f, %.2f, %.2f, %.2f | \n",
+  printf("| %.2lf, %.2lf, %.2lf, %.2lf | \n",
       matrix.m2,
       matrix.m6,
       matrix.m10,
       matrix.m14
   );
 
-  printf("| %.2f, %.2f, %.2f, %.2f | \n",
+  printf("| %.2lf, %.2lf, %.2lf, %.2lf | \n",
       matrix.m3,
       matrix.m7,
       matrix.m11,

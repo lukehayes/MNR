@@ -30,12 +30,27 @@ Mat4 Mat4Zero()
 
 Mat4 Mat4Identity()
 {
-  Mat4 matrix = Mat4Zero();
+  Mat4 matrix;
 
-  matrix.m0  = 1.0;
-  matrix.m5  = 1.0;
-  matrix.m10 = 1.0;
-  matrix.m15 = 1.0;
+  matrix.m0  = 1;
+  matrix.m1  = 0;
+  matrix.m2  = 0;
+  matrix.m3  = 0;
+
+  matrix.m4  = 0;
+  matrix.m5  = 1;
+  matrix.m6  = 0;
+  matrix.m7  = 0;
+
+  matrix.m8  = 0;
+  matrix.m9  = 0;
+  matrix.m10 = 1;
+  matrix.m11 = 0;
+
+  matrix.m12 = 0;
+  matrix.m13 = 0;
+  matrix.m14 = 0;
+  matrix.m15 = 1;
 
   return matrix;
 }

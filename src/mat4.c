@@ -161,29 +161,43 @@ float Mat4GetValue(const Mat4* m, int column, int row)
   // return m->values[column][row];
 }
 
-// void Mat4Print(Mat4 matrix)
-// {
-//   printf("\n");
-//   printf("Mat4 \n");
-//   for(int i = 0; i <= 3; i++)
-//   {
-//     for(int j = 0; j <= 3; j++)
-//     {
-//       if(j < 3)
-//       {
-//         printf("| %.2f,", matrix.values[j][i]);
-//       }else
-//       {
-//         printf("| %.2f", matrix.values[j][i]);
-//         printf("|\n");
-//       }
-//     }
-//   }
-//   printf("\n");
-// }
-//
+void Mat4Print(Mat4 matrix)
+{
+  printf("-----------------------------\n");
+  printf("| %.2f, %.2f, %.2f, %.2f | \n",
+      matrix.m0,
+      matrix.m4,
+      matrix.m8,
+      matrix.m12
+  );
+
+  printf("| %.2f, %.2f, %.2f, %.2f | \n",
+      matrix.m1,
+      matrix.m5,
+      matrix.m9,
+      matrix.m13
+  );
+
+  printf("| %.2f, %.2f, %.2f, %.2f | \n",
+      matrix.m2,
+      matrix.m6,
+      matrix.m10,
+      matrix.m14
+  );
+
+  printf("| %.2f, %.2f, %.2f, %.2f | \n",
+      matrix.m3,
+      matrix.m7,
+      matrix.m11,
+      matrix.m15
+  );
+  printf("-----------------------------\n");
+
+  printf("\n");
+}
+
 // void Mat4PrintValue(Mat4* mat,int x, int y)
 // {
-//   printf("Matrix Value: %f \n", mat->values[x][y]);
+//   printf("Matrix Value: %.2f \n", mat->values[x][y]);
 // }
-//
+

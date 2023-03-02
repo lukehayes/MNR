@@ -1,4 +1,5 @@
 #include "math/vec3.h"
+#include "util/logging.h"
 #include <stdio.h>
 #include <math.h>
 
@@ -29,13 +30,26 @@ double Vec3Length(Vec3 v)
 
 Vec3 Vec3Normalize(Vec3 v)
 {
-  double vectorLength = Vec3Length(v);
+  if(Vec3IsZero(v))
+  {
+    // TODO Fix dividing by zero bug.
+    LOG("");
+    LOG("Vector passed to Vec3Normalize() is zero");
+    LOG("Returning RIDICULOUS value until I work out a solution.");
+    LOG("\n");
 
-  return (Vec3){
-    v.x / vectorLength,
-    v.y / vectorLength,
-    v.z / vectorLength,
-  };
+    return (Vec3){999,999,999};
+
+  }else {
+    double vectorLength = Vec3Length(v);
+
+    return (Vec3){
+      v.x / vectorLength,
+      v.y / vectorLength,
+      v.z / vectorLength
+    };
+  }
+
 }
 
 Vec3 Vec3Negate(Vec3 v)
@@ -85,7 +99,7 @@ double Vec3Dot(Vec3 a, Vec3 b)
   return a.x * b.x + a.y + b.y + a.z + b.z;
 }
 
-bool Vec3isZero(Vec3 v)
+bool Vec3IsZero(Vec3 v)
 {
   return v.x == 0 && v.y == 0 && v.y == 0;
 }

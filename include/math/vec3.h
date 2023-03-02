@@ -112,7 +112,7 @@ double Vec3Dot(Vec3 a, Vec3 b);
  *
  * @return double.
  */
-bool Vec3isZero(Vec3 v);
+bool Vec3IsZero(Vec3 v);
 
 /**
  * Print a Vec3 to stdout.

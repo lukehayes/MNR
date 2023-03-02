@@ -85,6 +85,11 @@ double Vec3Dot(Vec3 a, Vec3 b)
   return a.x * b.x + a.y + b.y + a.z + b.z;
 }
 
+bool Vec3isZero(Vec3 v)
+{
+  return v.x == 0 && v.y == 0 && v.y == 0;
+}
+
 void Vec3Print(Vec3 v)
 {
   printf("\n");

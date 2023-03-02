@@ -1,6 +1,8 @@
 #ifndef MATH_VEC3_H
 #define MATH_VEC3_H
 
+#include <stdbool.h>
+
 typedef struct Vec3
 {
   double x;
@@ -102,6 +104,15 @@ Vec3 Vec3Cross(Vec3 a, Vec3 b);
  * @return double.
  */
 double Vec3Dot(Vec3 a, Vec3 b);
+
+/**
+ * Check if every member of this Vec3 is zero.
+ *
+ * @param Vec3 v.
+ *
+ * @return double.
+ */
+bool Vec3isZero(Vec3 v);
 
 /**
  * Print a Vec3 to stdout.

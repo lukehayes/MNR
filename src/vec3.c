@@ -1,5 +1,6 @@
 #include "math/vec3.h"
 #include "util/logging.h"
+#include <float.h>
 #include <stdio.h>
 #include <math.h>
 
@@ -30,15 +31,10 @@ double Vec3Length(Vec3 v)
 
 Vec3 Vec3Normalize(Vec3 v)
 {
+  // TODO Fix dividing by zero bug.
   if(Vec3IsZero(v))
   {
-    // TODO Fix dividing by zero bug.
-    LOG("");
-    LOG("Vector passed to Vec3Normalize() is zero");
-    LOG("Returning RIDICULOUS value until I work out a solution.");
-    LOG("\n");
-
-    return (Vec3){999,999,999};
+    return (Vec3){0,0,0};
 
   }else {
     double vectorLength = Vec3Length(v);

@@ -20,6 +20,9 @@ typedef struct Shader
  */
 Shader gfxShaderCreate(const char* vtx_path, const char* frag_path);
 
+
+void gfxShaderUniform1f(const char* name, float value, Shader* shader);
+
 /**
  * Delete the shader program.
  *

@@ -28,6 +28,8 @@ static void gfxShaderCheckErrors(unsigned int shader, const char* type)
       printf("SHADER_LINKING_ERROR: %s \n %s \n -- \n", type, infoLog);
     }
   }
+
+  printf("No Error Found\n");
 }
 
 /**
@@ -75,6 +77,12 @@ Shader gfxShaderCreate(const char* vtx_path, const char* frag_path)
   free((char*)fsh_contents);
 
   return shader;
+}
+
+void gfxShaderUniform1f(const char* name, float value, Shader* shader)
+{
+  int shaderLocation = glGetUniformLocation(shader->program, name);
+  glUniform1f(shaderLocation, value);
 }
 
 void gfxShaderDestroy(Shader* shader)

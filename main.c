@@ -4,6 +4,7 @@
 #include <math.h>
 
 #include "gfx/shader.h"
+#include "gfx/buffer.h"
 
 float c = 0.0;
 
@@ -54,29 +55,10 @@ int main(void)
         1,2,3
     };
 
-    GLuint vao;
-    GLuint vbo;
-    GLuint ibo;
-
-    glGenVertexArrays( 1, &vao );
-    glBindVertexArray( vao );
-    
-    // VERTEX BUFFER
-    glGenBuffers( 1, &vbo);
-    glBindBuffer( GL_ARRAY_BUFFER, vbo);
-
-
-    glEnableVertexAttribArray( 0 );
-    glVertexAttribPointer( 0, 3, GL_FLOAT, GL_FALSE, 0, 0 );
-    glBufferData( GL_ARRAY_BUFFER, sizeof(float) * 12 , verticies, GL_STATIC_DRAW );
-
-
     Shader shader = gfxShaderCreate("../res/default-vsh.glsl", "../res/default-fsh.glsl");
 
-    // INDEX BUFFER
-    glGenBuffers( 1, &ibo );
-    glBindBuffer( GL_ELEMENT_ARRAY_BUFFER, ibo );
-    glBufferData( GL_ELEMENT_ARRAY_BUFFER, sizeof(int) * 6 , indicies, GL_STATIC_DRAW );
+    Buffer buffer = CreateGLBuffer(verticies, 12, indicies,6);
+
         
     // End of GL Setup
     // ------------------------------------------------------------
@@ -91,11 +73,11 @@ int main(void)
 
         glUseProgram(shader.program);
 
-        glBindBuffer( GL_ARRAY_BUFFER, vbo);
+        glBindBuffer( buffer.bufferType, buffer.vbo);
 
         glDrawElements(
           GL_TRIANGLES,
-          6,
+          buffer.idx_count,
           GL_UNSIGNED_INT,
           (void*)0
         );

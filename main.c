@@ -5,6 +5,7 @@
 
 #include "gfx/shader.h"
 #include "gfx/buffer.h"
+#include "gfx/mesh.h"
 
 float c = 0.0;
 
@@ -43,21 +44,17 @@ int main(void)
 
     // ------------------------------------------------------------
     // SIMPLE TEST OPENGL SETUP
-    float verticies[] = {
-         0.5f,  0.5f, 0.0f,
-         0.5f, -0.5f, 0.0f,
-        -0.5f, -0.5f, 0.0f,
-        -0.5f,  0.5f, 0.0f   
-    };
 
-    int indicies[] = {
-        0,1,3,
-        1,2,3
-    };
+    Mesh mesh = CreateMeshFactory();
 
     Shader shader = gfxShaderCreate("../res/default-vsh.glsl", "../res/default-fsh.glsl");
 
-    Buffer buffer = CreateGLBuffer(verticies, 12, indicies,6);
+    Buffer buffer = CreateGLBuffer(
+            mesh.quad_verticies, 
+            mesh.quad_vertex_count,
+            mesh.quad_indicies,
+            mesh.quad_index_count
+            );
 
         
     // End of GL Setup
@@ -74,6 +71,9 @@ int main(void)
         glUseProgram(shader.program);
 
         glBindBuffer( buffer.bufferType, buffer.vbo);
+
+
+        gfxShaderUniform3f("test", sin(c), cos(c), tan(c), &shader);
 
         glDrawElements(
           GL_TRIANGLES,

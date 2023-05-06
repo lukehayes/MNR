@@ -97,6 +97,13 @@ void gfxShaderUniform3f(const char* name, float v1, float v2, float v3, Shader* 
   glUniform3f(shaderLocation, v1, v2, v3);
 }
 
+void gfxShaderSendUniformMat4(Shader* shader, Mat4* matrix, const char* name)
+{
+  double matrixArray[16];
+  GLuint uniformLocation = glGetUniformLocation(shader->program, name);
+  glUniformMatrix4fv(uniformLocation, 1, GL_TRUE, (float*)Mat4ToArray(matrix, matrixArray));
+}
+
 void gfxShaderDestroy(Shader* shader)
 {
   glDeleteProgram(shader->program);

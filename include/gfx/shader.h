@@ -2,6 +2,7 @@
 #define GFX_SHADER_H
 
 #include "common/types.h"
+#include "math/mat4.h"
 
 typedef struct Shader
 {
@@ -19,7 +20,6 @@ typedef struct Shader
  * @return Shader
  */
 Shader gfxShaderCreate(const char* vtx_path, const char* frag_path);
-
 
 /**
  * Delete the shader program.
@@ -66,7 +66,18 @@ void gfxShaderUniform2f(const char* name, float v1, float v2, Shader* shader);
  *
  * @return void
  */
-
 void gfxShaderUniform3f(const char* name, float v1, float v2, float v3, Shader* shader);
+
+/**
+ * Send a mat4 value to the shader.
+ *
+ * @param const char* name.
+ * @param Mat4 matrix.
+ *
+ * @param Shader* shader.
+ *
+ * @return void
+ */
+void gfxShaderSendUniformMat4(Shader* shader, Mat4* matrix, const char* name);
 
 #endif

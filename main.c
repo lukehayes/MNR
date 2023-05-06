@@ -7,13 +7,18 @@
 #include "gfx/buffer.h"
 #include "gfx/mesh.h"
 
-float c = 0.0;
+#include "math/vec3.h"
+#include "math/mat4.h"
 
-#if MNR_DEBUG == 1
-#define LOG(x) (printf("LOG: %s \n", x))
-#else
-#define LOG(x)
-#endif
+#include "util/logging.h"
+
+/* -----------------------------------------------------------------------------
+  Useful Constants.
+------------------------------------------------------------------------------*/
+float c = 0.0;
+const float WIDTH  = 800.0;
+const float HEIGHT = 600.0;
+
 
 int main(void)
 {
@@ -29,7 +34,7 @@ int main(void)
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     /* Create a windowed mode window and its OpenGL context */
-    window = glfwCreateWindow(800, 600, "app", NULL, NULL);
+    window = glfwCreateWindow(WIDTH, HEIGHT, "app", NULL, NULL);
     if (!window)
     {
         glfwTerminate();
@@ -59,6 +64,39 @@ int main(void)
         
     // End of GL Setup
     // ------------------------------------------------------------
+    OrthoProjection proj = {
+        .top = 0,
+        .bottom = HEIGHT,
+        .left = 0,
+        .right = WIDTH,
+        .near = 0.0001,
+        .far = 1000.0
+    };
+
+
+    LOG("Creating Orthographic Projection Matrix");
+    Mat4 orthoProj = Mat4OrthoProjection(&proj);
+
+    LOG("Creating Position Vector");
+    Vec3 v = Vec3Create(0,0,0);
+    Vec3 pos = Vec3Create(0,0,0);
+
+    Mat4 viewMatrix = Mat4LookAt((Vec3){0,0,-3}, pos, (Vec3){0,1,0});
+
+    LOG("Creating Model Identity Matrix");
+    Mat4 modelMatrix = Mat4Identity();
+
+    LOG("Sending Model Matrix Uniform");
+    gfxShaderSendUniformMat4(&shader, &modelMatrix, "model");
+
+
+    LOG("Sending View Matrix Uniform");
+    gfxShaderSendUniformMat4(&shader, &viewMatrix, "view");
+
+
+    LOG("Sending Projection Matrix Uniform");
+    gfxShaderSendUniformMat4(&shader, &orthoProj, "projection");
+
 
     /* Loop until the user closes the window */
     while (!glfwWindowShouldClose(window))
@@ -69,12 +107,29 @@ int main(void)
         glClearColor(0.2, 0.2, 0.2, sin(c));
 
         glUseProgram(shader.program);
+        
+        pos.x = cos(c);
+        pos.y = sin(c);
+        Mat4Translate(&modelMatrix, pos);
+
+        viewMatrix = Mat4LookAt(
+            (Vec3){0,0,0},
+            (Vec3){0,0,0} ,
+            (Vec3){0,1,0}
+        );
+        
+        Mat4Print(orthoProj);
+
+        gfxShaderSendUniformMat4(&shader, &modelMatrix, "model");
+        gfxShaderSendUniformMat4(&shader, &viewMatrix,  "view");
+        gfxShaderSendUniformMat4(&shader, &orthoProj,   "projection");
+    
 
         glBindBuffer(buffer.bufferType, buffer.vbo);
 
         glDrawElements(
           GL_TRIANGLES,
-          buffer.idx_count,
+          mesh.quad_index_count,
           GL_UNSIGNED_INT,
           (void*)0
         );

@@ -33,9 +33,9 @@ include_directories(${INCLUDE_DIRS})
 
 # Add debugging option
 #
-option(MNR_DEBUG "Enter debug mode" 0)
-if (MNR_DEBUG)
-  add_definitions(-DMNR_DEBUG)
+option(DEV_DEBUG "Enter debug mode" 0)
+if (DEV_DEBUG)
+  add_definitions(-DDEV_DEBUG)
 endif()
 
 # Create the final binary.

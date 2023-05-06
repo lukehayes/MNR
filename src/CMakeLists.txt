@@ -5,4 +5,5 @@ add_library(MNR
   buffer.c
   mat4.c
   vec3.c
+  logging.c
 )

@@ -70,10 +70,7 @@ int main(void)
 
         glUseProgram(shader.program);
 
-        glBindBuffer( buffer.bufferType, buffer.vbo);
-
-
-        gfxShaderUniform3f("test", sin(c), cos(c), tan(c), &shader);
+        glBindBuffer(buffer.bufferType, buffer.vbo);
 
         glDrawElements(
           GL_TRIANGLES,

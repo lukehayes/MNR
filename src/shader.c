@@ -85,6 +85,18 @@ void gfxShaderUniform1f(const char* name, float value, Shader* shader)
   glUniform1f(shaderLocation, value);
 }
 
+void gfxShaderUniform2f(const char* name, float v1, float v2, Shader* shader)
+{
+  int shaderLocation = glGetUniformLocation(shader->program, name);
+  glUniform2f(shaderLocation, v1, v2);
+}
+
+void gfxShaderUniform3f(const char* name, float v1, float v2, float v3, Shader* shader)
+{
+  int shaderLocation = glGetUniformLocation(shader->program, name);
+  glUniform3f(shaderLocation, v1, v2, v3);
+}
+
 void gfxShaderDestroy(Shader* shader)
 {
   glDeleteProgram(shader->program);

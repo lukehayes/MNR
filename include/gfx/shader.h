@@ -21,8 +21,6 @@ typedef struct Shader
 Shader gfxShaderCreate(const char* vtx_path, const char* frag_path);
 
 
-void gfxShaderUniform1f(const char* name, float value, Shader* shader);
-
 /**
  * Delete the shader program.
  *
@@ -32,6 +30,43 @@ void gfxShaderUniform1f(const char* name, float value, Shader* shader);
  */
 void gfxShaderDestroy(Shader* shader);
 
-// static void gfxShaderCheckErrors(unsigned int shader, const char* type);
+/**
+ * Send a single value float uniform value to the shader.
+ *
+ * @param const char* name.
+ * @param float value.
+ * @param Shader* shader.
+ *
+ * @return void
+ */
+void gfxShaderUniform1f(const char* name, float value, Shader* shader);
+
+/**
+ * Send two float uniform values to the shader.
+ *
+ * @param const char* name.
+ * @param float v1.
+ * @param float v2.
+ *
+ * @param Shader* shader.
+ *
+ * @return void
+ */
+void gfxShaderUniform2f(const char* name, float v1, float v2, Shader* shader);
+
+/**
+ * Send three float uniform values to the shader.
+ *
+ * @param const char* name.
+ * @param float v1.
+ * @param float v2.
+ * @param float v3.
+ *
+ * @param Shader* shader.
+ *
+ * @return void
+ */
+
+void gfxShaderUniform3f(const char* name, float v1, float v2, float v3, Shader* shader);
 
 #endif
